@@ -2,7 +2,7 @@
   "name": "AngularJS",
   "version": "1.0.0",
   "description": "",
-  "main": "todo.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
     "mysql": "^2.16.0"
   },
   "devDependencies": {
