@@ -46,15 +46,11 @@ app.get('/todos', function (req, res) {
 
 // Add a new todo  
 app.post('/addTodo', function (req, res) {
-    console.log(req.data);
-    let todo = req.data;
-    
-    if (!todo) {
-        console.log('not a task');
-        return res.status(400).send({ error:true, message: 'Please provide task' });
-    }
 
-    connection.query("INSERT INTO todos SET ? ",  todo , function (error, results, fields) {
+    var task = JSON.parse(JSON.stringify(req.body));
+    console.log(task);
+
+    connection.query("INSERT INTO todos SET ? ",  {"name" : req.body.name, "complete": req.body.complete} , function (error, results, fields) {
         if (error) throw error;
         console.log('Task inserted');
         return res.send({ error: false, data: results, message: 'New task has been created successfully.' });

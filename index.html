@@ -2,6 +2,10 @@
 <html ng-app="todoApp">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <script src="http://localhost:8080/js/todoController.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -10,7 +14,6 @@
   </head>
   <body>
 
-    <h2>Todo</h2>
     <div class="w3-card-2 w3-margin" style="max-width:400px;" ng-controller="TodoListController">
             <header class="w3-container w3-light-grey w3-padding-16">
                     <h3>To do List</h3>
@@ -19,7 +22,7 @@
       <!-- [ <a href="" ng-click="todoList.archive()">archive</a> ] -->
 
       <form ng-submit="addTodo()">
-            <input type="text" ng-model="todoList.name"  size="30"
+            <input type="text" ng-model="newTodo"  size="30"
                    placeholder="add new todo here">
             <input class="btn-primary" type="submit" value="add">
           </form>

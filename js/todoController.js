@@ -1,9 +1,7 @@
 
 
 angular.module('todoApp', [])
-.controller('TodoListController', function($scope, $http, $location) {
- 
-    
+.controller('TodoListController', function($scope, $http, $location) {  
   
   var url = "/todos";
               
@@ -14,30 +12,15 @@ angular.module('todoApp', [])
       $scope.getErrMsg = "Error Status: " +  response;
   });
 }
-  
-  // // Adding Data
-  var addTodo = function (){ 
-    // const todo = { name: $scope.todoList.name, complete: false };
 
-    var todo = { id: "10", name: 'Test todo Controller', complete: false };
-
-    var req = {
-        method: 'POST',
-        url: '/addTodo',
-        headers: {
-          'Content-Type':'x-www-form-urlencoded'
-        },
-        data: { todo: "Message" }
-       }
-
-    $http.post(req).then(function(data){
-    console.log('Last insert ID:', data.insertId);
-    getTodos();
-    });
+  $scope.addTodo = function(){
+        $http.post("/addTodo", {"name":$scope.newTodo, "complete":"0"}).then(function(data, status) {
+        $scope.newTodo = "";
+          getTodos();
+      })
   }
 
   getTodos();
-  addTodo();
 
 });
 
