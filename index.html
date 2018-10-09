@@ -2,44 +2,37 @@
 <html ng-app="todoApp">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
-    <script src="app.js"></script>
-    <script src="js/list.js"></script>
-    <!-- <script src="todo.js"></script> -->
-    <script src="app.js"></script>
+    <script src="http://localhost:8080/js/todoController.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="css/todo.css">
+    <link rel="stylesheet" href="http://localhost:8080/css/todo.css">
     
   </head>
   <body>
-
-    <div class="w-100 h-50 bg-success">
-        <span>Menu | Menu | Menu</span>
-    </div>
 
     <h2>Todo</h2>
     <div class="w3-card-2 w3-margin" style="max-width:400px;" ng-controller="TodoListController">
             <header class="w3-container w3-light-grey w3-padding-16">
                     <h3>To do List</h3>
                   </header>
-        <!-- <span>{{todoList}} of {{todoList.todos.length}} remaining</span>
-      [ <a href="" ng-click="todoList.archive()">archive</a> ] -->
+        <span>{{todoList.length}} remaining</span>
+      <!-- [ <a href="" ng-click="todoList.archive()">archive</a> ] -->
 
-      <form ng-submit="todoList.addTodo()">
-            <input type="text" ng-model="todoList.todoText"  size="30"
+      <form ng-submit="addTodo()">
+            <input type="text" ng-model="todoList.name"  size="30"
                    placeholder="add new todo here">
             <input class="btn-primary" type="submit" value="add">
           </form>
 
       <ul class="w3-ul">
-        <li class="w3-padding-16" ng-repeat="todo in todoList.todos">
+        <li class="w3-padding-16" ng-repeat="todo in todoList">
           <label class="checkbox">
             <input type="checkbox" ng-model="todo.done">
-            <span class="done-{{todo.done}}">{{todo}}</span>
+            <span >{{todo.name}}</span>
           </label>
         </li>
       </ul>
-      
+      {{getErrMsg}}
     </div>
 
    

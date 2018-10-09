@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 var mysql = require("mysql");
+var path  = require("path");
+app.use(express.static('./'));
  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -10,14 +12,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 
+// Default page
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname +'/index.html'));
+  });
 
-
-// default route
-app.get('/', function (req, res) {
-    return res.send({ error: true, message: 'hello' })
-});
- 
-// port must be set to 8080 because incoming http requests are routed from port 80 to port 8080
+// port 
 app.listen(8080, function () {
     console.log('Node app is running on port 8080');
 });
@@ -35,17 +35,28 @@ const connection = mysql.createConnection({
     console.log('Connected!');
   });
 
-  // connect to database
-//   connection.connect();
-
-
-
 // Retrieve all todos 
 app.get('/todos', function (req, res) {
     connection.query('SELECT * FROM todos', function (error, data, fields) {
         if (error) throw error;
-        return res.send('Fine');
-        // return res.send({data});
+        return res.send(JSON.stringify(data));
+    });
+});
 
+
+// Add a new todo  
+app.post('/addTodo', function (req, res) {
+    console.log(req.data);
+    let todo = req.data;
+    
+    if (!todo) {
+        console.log('not a task');
+        return res.status(400).send({ error:true, message: 'Please provide task' });
+    }
+
+    connection.query("INSERT INTO todos SET ? ",  todo , function (error, results, fields) {
+        if (error) throw error;
+        console.log('Task inserted');
+        return res.send({ error: false, data: results, message: 'New task has been created successfully.' });
     });
 });
