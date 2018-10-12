@@ -20,7 +20,27 @@ angular.module('todoApp', [])
       })
   }
 
+  $scope.completeTodo = function(todo){
+
+    var todo_status;
+    if (todo.complete)
+        todo_status = 1;
+    else
+        todo_status = 0;
+
+    $http.put("/updateTodo", {"todo_id":todo.id, "todo_complete":todo.complete}).then(function(data, status) {
+          getTodos();
+      })
+  }
+
+  $scope.deleteTodo = function(){
+    $http.delete("/deleteTodo", {"todo_id":$scope.todo.id}).then(function(data, status) {
+          getTodos();
+      })
+  }
+
   getTodos();
+
 
 });
 

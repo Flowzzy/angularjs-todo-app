@@ -56,3 +56,33 @@ app.post('/addTodo', function (req, res) {
         return res.send({ error: false, data: results, message: 'New task has been created successfully.' });
     });
 });
+
+
+//  Update todo status with id
+app.put('/updateTodo', function (req, res) {
+ 
+    var todo_status;
+    let todo_id = req.body.todo_id;
+    let todo_complete = req.body.todo_complete
+
+    if (todo_complete)
+        todo_status = 1;
+    else
+        todo_status = 0;
+
+    connection.query("UPDATE todos SET complete = ? WHERE id = ?", [todo_status, todo_id], function (error, results, fields) {
+        if (error) throw error;
+        return res.send({ error: false, data: results, message: 'Task has been updated successfully.' });
+    });
+});
+
+//  Delete todo
+app.delete('/deleteTodo', function (req, res) {
+ 
+    let task_id = req.body.todo_id;
+ 
+    connection.query('DELETE FROM todos WHERE id = ?', [task_id], function (error, results, fields) {
+        if (error) throw error;
+        return res.send({ error: false, data: results, message: 'Task has been deleted successfully.' });
+    });
+}); 
