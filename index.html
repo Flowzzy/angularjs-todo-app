@@ -1,39 +1,33 @@
 <!doctype html>
 <html ng-app="todoApp">
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>    
-    <script src="js/todoController.js"></script>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" >
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="css/todo.css">
-    
-  </head>
-  <body>
 
-    <div class="w3-card-2 w3-margin" style="max-width:400px;" ng-controller="TodoListController">
-            <header class="w3-container w3-light-grey w3-padding-16">
-                    <h3>To do List</h3>
-                  </header>
-        <span>{{todoList.length}} remaining</span>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+  <script src="app/controllers/todoController.js"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="app/css/todo.css">
 
-      <form ng-submit="addTodo()">
-            <input type="text" ng-model="newTodo"  size="30"
-                   placeholder="add new todo here">
-            <input class="btn-primary" type="submit" value="add">
-          </form>
+</head>
 
-      <ul class="w3-ul">
-        <li class="w3-padding-16" ng-repeat="todo in todoList">
-          <label class="checkbox">
-            <input type="checkbox" ng-model="todo.complete">
-            <!-- <input type="checkbox" ng-model="todo.complete" ng-checked="completeTodo(todo)"> -->
-            <span >{{todo.name}}</span>
-          </label>
-        </li>
-      </ul>
-      {{getErrMsg}}
+<body>
+
+  <div class="w3-card-2 w3-margin" style="max-width:400px;" ng-controller="TodoListController">
+    <header class="w3-container w3-light-grey w3-padding-16">
+      <h3>To do List</h3>
+    </header>
+    <span>{{todoList.length}} remaining</span>
+
+    <form ng-submit="addTodo()">
+      <input type="text" ng-model="newTodo" size="30" placeholder="add new todo here">
+      <input class="btn-primary" type="submit" value="add">
+    </form>
+
+
+    <todo-list-view todo-list="todoList" error-message="getErrMsg"></todo-list-view>
     </div>
 
-   
-  </body>
+
+</body>
+
 </html>

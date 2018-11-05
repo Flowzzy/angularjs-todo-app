@@ -1,0 +1,14 @@
+
+<ul class="w3-ul">
+  <li class="w3-padding-16" ng-repeat="todo in todoList">
+    <todo-item todoList></todo-item>
+    <label class="checkbox">
+      <!-- <input type="checkbox" ng-model="checkbox" ng-true-value="1" ng-false-value="0" ng-click="completeTodo(todo)"> -->
+      <input type="checkbox" ng-model="todo.complete" ng-checked="completeTodo(todo)"> 
+      <span>{{todo.name}}</span>
+    </label>
+    <span ng-click="removeItem(todo)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span>
+  </li> 
+  </li>
+  {{getErrMsg}}
+</ul>
