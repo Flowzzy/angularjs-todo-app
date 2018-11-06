@@ -30,6 +30,7 @@ myApp.controller('TodoListController', function ($scope, $http) {
   }
 
   $scope.removeItem = function (todo) {
+    console.log(todo);
     $http.delete("/deleteTodo/" + todo.id).then(function (data, status) {
       getTodos();
     })
@@ -37,12 +38,12 @@ myApp.controller('TodoListController', function ($scope, $http) {
 
   getTodos();
 
-  $scope.$watch(function () {
-    return $scope.checkbox;
-  }, function () {
-    $scope.checkbox = Number($scope.checkbox);
-    console.log($scope.checkbox, typeof $scope.checkbox);
-  }, true);
+  // $scope.$watch(function () {
+  //   return $scope.checkbox;
+  // }, function () {
+  //   $scope.checkbox = Number($scope.checkbox);
+  //   console.log($scope.checkbox, typeof $scope.checkbox);
+  // }, true);
 
 });
 
@@ -51,10 +52,11 @@ myApp.directive("todoListView", function () {
     restrict: 'AECM',
     templateUrl: '/app/directives/todoList.html',
     replace: true,
+    controller: 'TodoListController',
     scope: {
         todoList: "=",
         errorMessage: "@"
-    }
-  }
-});
+    },
+    
+}});
 
