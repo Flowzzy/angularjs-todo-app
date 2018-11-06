@@ -22,12 +22,12 @@ myApp.controller('TodoListController', function ($scope, $http) {
     })
   }
 
-  $scope.completeTodo = function (todo) {
+  // $scope.completeTodo = function (todo) {
 
-    $http.put("/completeTodo/" + todo.id).then(function (data, status) {
-      getTodos();
-    })
-  }
+  //   $http.put("/completeTodo/" + todo.id).then(function (data, status) {
+  //     getTodos();
+  //   })
+  // }
 
   $scope.removeItem = function (todo) {
     console.log(todo);
