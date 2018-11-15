@@ -23,13 +23,27 @@ describe('Todo CRUD service test', function () {
     });
 
 
-    it('Should have success set to true after API calling', function () {
+    it('Should have success set to true after GetTodos API method calling', function () {
 
         var returnData = {};
         //7. expectGET to make sure this is called once.
-        httpBackend.expectGET('http://localhost:8080/todos');
+        httpBackend.expectGET('/todos').respond(200);
 
-        // httpBackend.flush();
+        crudAPIService.getTodos();
+
+        httpBackend.flush();
+    });
+
+
+    it('Should have success set to true after AddTodo API method calling', function () {
+
+        var returnData = { "name": "new task", "complete": "0" }; 
+        //7. expectGET to make sure this is called once.
+        httpBackend.expectPOST('/addTodo', returnData).respond(200);
+
+        crudAPIService.addTodo("new task");
+
+        httpBackend.flush();
     });
  
 });
