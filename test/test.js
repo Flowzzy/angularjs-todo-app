@@ -3,6 +3,7 @@ angular.module('todoApp')
 //1.
 describe('Todo CRUD service test', function () {
     var crudAPIService, httpBackend;
+    var exampleTodos = {name: 'todo1', name: 'todo2'};
 
     beforeEach(function () {
         //3. load the module.
@@ -14,6 +15,9 @@ describe('Todo CRUD service test', function () {
             httpBackend = _$httpBackend_;
         });
 
+        httpBackend.when('GET', '/todos')
+            .respond(exampleTodos);
+
     });
 
     // 5. make sure no expectations were missed in your tests.
@@ -23,13 +27,42 @@ describe('Todo CRUD service test', function () {
     });
 
 
-    it('Should have success set to true after API calling', function () {
+    it('getTodos should have successfully get all todos from backend server', function () {
+        // Given
+        httpBackend.expectGET('/todos');
+        
+        // When
+        var sut = crudAPIService.getTodos().then((result) => {
+            // Then
+            expect(result.data).toEqual(exampleTodos);
+        });
+        
+        // clean up and make sure that async methods are closed and tests ends
+        httpBackend.flush();
+    });
 
-        var returnData = {};
-        //7. expectGET to make sure this is called once.
-        httpBackend.expectGET('http://localhost:8080/todos');
+    it('randomCalculate should calculate with valid input value', function () {
+        // Given
+        var testInput = 5;
+		
+        // When
+        var sut = crudAPIService.randomCalulation(testInput);
+		
+        // Then
+        expect(sut).toEqual(10)
+    });
 
-        // httpBackend.flush();
+    it('randomCalculate should fail to calculate with invalid input value', function () {
+        // Given
+        var testInput = null;
+		
+        // When
+        try{
+            crudAPIService.randomCalulation(testInput);
+        } catch(e) {
+            // Then
+            expect(e).toEqual('Null input value')
+        }
     });
  
 });

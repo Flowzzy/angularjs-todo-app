@@ -1,10 +1,12 @@
 {
-  "name": "AngularJS Todo App",
+  "name": "AngularJSTodoApp",
   "version": "1.1.0",
-  "description": "",
+  "description": "Sample app",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "test": "karma start"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,9 @@
     "mysql": "^2.16.0"
   },
   "devDependencies": {
+    "angular": "^1.7.5",
+    "angular-mocks": "^1.7.5",
+    "angular-ui-router": "^1.0.20",
     "grunt": "^1.0.3",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-execute": "^0.2.2",

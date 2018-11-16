@@ -15,6 +15,13 @@ angular.module('todoApp')
             $http.delete("/deleteTodo/" + todo.id)
         }
 
+        this.randomCalulation = function (input) {
+            if(!input)
+                throw 'Null input value';
+
+            return input + 5;
+        }
+
     });
 
 
