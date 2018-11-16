@@ -27,6 +27,29 @@ describe('Todo CRUD service test', function () {
         httpBackend.verifyNoOutstandingRequest();
     });
 
+    it('Should have success set to true after GetTodos API method calling', function () {
+
+        var returnData = {};
+        //7. expectGET to make sure this is called once.
+        httpBackend.expectGET('/todos').respond(200);
+
+        crudAPIService.getTodos();
+
+        httpBackend.flush();
+    });
+
+
+    it('Should have success set to true after AddTodo API method calling', function () {
+
+        var returnData = { "name": "new task", "complete": "0" }; 
+        //7. expectGET to make sure this is called once.
+        httpBackend.expectPOST('/addTodo', returnData).respond(200);
+
+        crudAPIService.addTodo("new task");
+
+        httpBackend.flush();
+    });
+
 
     it('getTodos should have successfully get all todos from backend server', function () {
         httpBackend.expectGET('/todos');
