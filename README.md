@@ -1,5 +1,5 @@
 # angularjs-todo-app
-Basic Todo AngularJS with Node and MySQL
+Basic Todo AngularJS with Node + MySQL + Express
 
 Commands available:
 
