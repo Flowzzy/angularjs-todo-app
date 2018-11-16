@@ -15,6 +15,7 @@ describe('Todo CRUD service test', function () {
             httpBackend = _$httpBackend_;
         });
 
+        // Return a mock response
         httpBackend.when('GET', '/todos')
             .respond(exampleTodos);
 
@@ -28,8 +29,9 @@ describe('Todo CRUD service test', function () {
 
 
     it('getTodos should have successfully get all todos from backend server', function () {
-        // Given
         httpBackend.expectGET('/todos');
+        
+        // Given (not really anything for us to use as a given in this case)
         
         // When
         var sut = crudAPIService.getTodos().then((result) => {
